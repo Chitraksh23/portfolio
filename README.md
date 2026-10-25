@@ -12,10 +12,9 @@ Fill these in before you share the link:
 | --- | --- | --- |
 | Email | `site.contact.email` | `you@example.com` |
 | LinkedIn | `site.contact.linkedin` | `https://www.linkedin.com/in/your-handle/` |
-| Resume | `site.contact.resume` | `/resume.pdf` (put `resume.pdf` in `public/`) |
+| Resume | `site.contact.resume` | already set to `/resume.pdf`; replace `public/resume.pdf` to update |
 | Live URL | `site.url` | `https://your-name.vercel.app` |
 | Dates | `experience[].period` | `2025 to present` |
-| Liquidmind points | `experience[1].highlights` | add `{ id, title, text, points: [...] }` |
 | Tech strip under the hero | `marquee` | `["LangGraph", ...]` |
 | Repo links | `projects[].links` | `{ label: "Source", href: "https://github.com/..." }` |
 

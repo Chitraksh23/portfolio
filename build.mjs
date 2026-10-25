@@ -24,7 +24,7 @@ const tags = (list) =>
 
 const c = site.contact ?? {};
 const github = c.github ? c.github.replace(/^https?:\/\//, "") : "";
-const title = `${site.name} | ${site.role}`;
+const title = `${site.fullName ?? site.name} | ${site.role}`;
 
 const questions = [
   "What have you built with RAG?",
@@ -37,7 +37,7 @@ const questions = [
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
-  name: site.name,
+  name: site.fullName ?? site.name,
   jobTitle: site.role,
   worksFor: { "@type": "Organization", name: site.employer },
   address: { "@type": "PostalAddress", addressLocality: site.location },
@@ -63,7 +63,7 @@ const roleHtml = (r, ri) => `
                       (h, i) => `
               <div class="work card" data-spot${rv(i)}>
                 <h4>${esc(h.title)}</h4>
-                <p>${esc(h.text)}</p>
+                ${h.text ? `<p>${esc(h.text)}</p>` : ""}
                 ${h.points?.length ? `<ul class="points">${h.points.map((p) => `<li>${esc(p)}</li>`).join("")}</ul>` : ""}
                 ${tags(h.tags)}
               </div>`
@@ -78,6 +78,7 @@ const projectHtml = (p, i) => `
             <p class="project-kind">${esc(p.kind)}</p>
             <h3>${esc(p.name)}</h3>
             <p class="project-summary">${esc(p.summary)}</p>
+            ${p.points?.length ? `<ul class="points">${p.points.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>` : ""}
             ${p.links?.length ? `<p class="project-links">${p.links.map((l) => a(l.href, l.label, true)).join("")}</p>` : ""}
             ${tags(p.stack)}
           </article>`;
@@ -235,7 +236,7 @@ const html = `<!doctype html>
 
   <footer class="foot">
     <div class="wrap">
-      <p>${esc(site.name)}, ${esc(site.role)}</p>
+      <p>${esc(site.fullName ?? site.name)}, ${esc(site.role)}</p>
       <p>${github ? `${esc(github)}. ` : ""}${new Date().getFullYear()}</p>
     </div>
   </footer>

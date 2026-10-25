@@ -24,7 +24,7 @@ export function buildChunks({ site, experience, projects, skills, education }) {
       tags: [],
     });
     for (const h of role.highlights ?? []) {
-      chunks.push({ ...base, id: `${role.id}-${h.id}`, title: h.title, text: h.text, tags: h.tags ?? [] });
+      if (h.text) chunks.push({ ...base, id: `${role.id}-${h.id}`, title: h.title, text: h.text, tags: h.tags ?? [] });
       (h.points ?? []).forEach((point, i) => {
         chunks.push({ ...base, id: `${role.id}-${h.id}-${i}`, title: h.title, text: point, tags: h.tags ?? [] });
       });
@@ -40,6 +40,17 @@ export function buildChunks({ site, experience, projects, skills, education }) {
       text: p.summary,
       tags: p.stack ?? [],
       anchor: `project-${p.id}`,
+    });
+    (p.points ?? []).forEach((point, i) => {
+      chunks.push({
+        id: `project-${p.id}-${i}`,
+        section: "Projects",
+        where: p.kind,
+        title: p.name,
+        text: point,
+        tags: p.stack ?? [],
+        anchor: `project-${p.id}`,
+      });
     });
   }
 

@@ -6,6 +6,7 @@
 
 export const site = {
   name: "Chitraksh",
+  fullName: "Singisetti Chitraksh",
   role: "AI Engineer",
   employer: "Orion Innovation",
   location: "Chennai, India",
@@ -18,16 +19,16 @@ export const site = {
     "I build production GenAI systems: RAG pipelines, agent workflows, and the evaluation that shows whether they work.",
 
   about:
-    "I'm an AI Engineer at Orion Innovation in Chennai. I work on retrieval-augmented generation, vector search, prompt engineering and LLM evaluation. Outside client work I build projects to test ideas end to end: a deep research agent, an LLM benchmarking framework and a hallucination detector.",
+    "I'm an AI Engineer at Orion Innovation in Chennai, working there since November 2024. I build retrieval-augmented generation pipelines, agentic workflows and LLM evaluation for enterprise clients, including a financial document intelligence system and an internal HR knowledge assistant. Outside work I build projects to test ideas end to end, such as a deep research agent, an LLM benchmarking framework and a hallucination detector.",
 
   description:
-    "Chitraksh is an AI Engineer in Chennai building production GenAI systems: RAG pipelines, agent workflows and LLM evaluation.",
+    "Singisetti Chitraksh is an AI Engineer in Chennai building production GenAI systems: RAG pipelines, agentic workflows and LLM evaluation.",
 
   contact: {
-    email: "", // e.g. "you@example.com"
+    email: "chitraksh456@gmail.com",
     linkedin: "", // e.g. "https://www.linkedin.com/in/your-handle/"
     github: "https://github.com/chitraksh23",
-    resume: "", // e.g. "/resume.pdf" after dropping resume.pdf into /public
+    resume: "/resume.pdf", // replace public/resume.pdf to update it
   },
 };
 
@@ -35,16 +36,17 @@ export const site = {
 export const marquee = [
   "RAG pipelines",
   "LangGraph",
+  "Agentic AI",
   "Vector search",
   "OpenSearch",
   "Prompt engineering",
   "LLM evaluation",
-  "Hallucination detection",
   "Tool calling",
+  "MCP",
+  "Fine-tuning",
   "FastAPI",
-  "Next.js",
-  "Streamlit",
   "AWS",
+  "Docker",
   "Python",
 ];
 
@@ -54,39 +56,58 @@ export const experience = [
     org: "Orion Innovation",
     role: "AI Engineer",
     place: "Chennai, India",
-    period: "", // e.g. "2025 to present"
+    period: "Nov 2024 to present",
     summary: "Building production GenAI systems for enterprise clients.",
     highlights: [
       {
-        id: "nexus",
-        title: "Nexus, an enterprise knowledge assistant",
-        text: "A RAG-based assistant that answers questions from an organization's own knowledge. I work on the retrieval pipelines, vector search and prompt engineering behind it.",
-        tags: ["RAG", "Vector search", "Prompt engineering"],
+        id: "finance",
+        title: "GenAI financial document intelligence (client project)",
+        text: "",
+        points: [
+          "Developed a GenAI document intelligence solution for financial document Q&A, cutting analyst document-search time by 40%.",
+          "Built end-to-end RAG pipelines with embeddings, semantic search and an OpenSearch vector database, improving retrieval recall by 25%.",
+          "Designed agentic workflows in LangGraph for multi-step orchestration, retrieval and tool integration, cutting manual follow-ups by 30%.",
+          "Applied prompt engineering, few-shot prompting and context grounding, improving accuracy by 20% and cutting hallucinations by 35%.",
+          "Built LLM evaluation workflows for relevance, recall, faithfulness and consistency, raising faithfulness by 15%.",
+          "Used AWS S3, EC2 and Lambda for scalable document processing and LLM inference, lowering latency by 25%.",
+        ],
+        tags: ["RAG", "LangGraph", "OpenSearch", "LLM evaluation", "AWS"],
       },
       {
-        id: "bank",
-        // Swap "a global bank" for "HSBC" if your client agreement allows naming them publicly.
-        title: "Financial document Q&A for a global bank",
-        text: "A generative AI document intelligence solution that answers questions over financial documents.",
+        id: "nexus",
+        title: "Nexus, an enterprise GenAI knowledge assistant",
+        text: "",
         points: [
-          "Built end-to-end RAG pipelines with embeddings, semantic search and an OpenSearch vector database.",
-          "Designed multi-step agent workflows in LangGraph covering retrieval, tool integration and context-aware responses.",
-          "Raised answer accuracy and cut hallucinations with prompt engineering, few-shot prompting, context grounding and token optimization.",
-          "Built evaluation workflows that score relevance, recall, faithfulness and consistency.",
-          "Ran document processing and LLM inference on AWS using S3, EC2 and Lambda.",
+          "Developed OI Nexus, an internal AI chatbot for employee questions on HR policies, hybrid work and leave, cutting query resolution time by 40% and repetitive HR tickets by 30%.",
+          "Built and optimized RAG pipelines with embeddings and vector search over enterprise document repositories, improving retrieval accuracy by 25% and reducing irrelevant results by 35%.",
+          "Engineered document ingestion, chunking and indexing workflows for large internal knowledge bases, processing 10,000+ documents while cutting indexing latency by 20%.",
+          "Refined response quality through prompt engineering, retrieval tuning and evaluation, raising answer accuracy by 15% and user satisfaction by 20%.",
+          "Partnered with HR and product stakeholders to define requirements and ship features, driving a 30% adoption increase in the first quarter.",
         ],
-        tags: ["Python", "LangGraph", "OpenSearch", "AWS", "LLM evaluation"],
+        tags: ["RAG", "Vector search", "Prompt engineering", "Chatbot"],
       },
     ],
   },
   {
     id: "liquidmind",
     org: "Liquidmind AI",
-    role: "Intern",
+    role: "Software Engineer Intern",
     place: "Bangalore, India",
-    period: "",
-    summary: "Internship at an AI company in Bangalore.",
-    highlights: [],
+    period: "Jul 2024 to Nov 2024",
+    summary: "Backend and document-automation work for business workflows.",
+    highlights: [
+      {
+        id: "internship",
+        title: "WhatsApp automation and OCR",
+        text: "",
+        points: [
+          "Developed and deployed backend Flask APIs to integrate a WhatsApp bot for business automation workflows, reducing manual message-handling effort by 30%.",
+          "Built an OCR pipeline using Document AI to extract structured information from unstructured documents, improving extraction accuracy and cutting manual data-entry time by 40%.",
+          "Worked with senior engineers to test and refine API endpoints before release, improving reliability and reducing post-deployment bug reports.",
+        ],
+        tags: ["Flask", "REST APIs", "Document AI", "OCR", "WhatsApp bot"],
+      },
+    ],
   },
 ];
 
@@ -94,11 +115,30 @@ export const projects = [
   {
     id: "micromanus",
     name: "MicroManus",
-    kind: "Deep research agent",
+    kind: "Deep research AI agent",
     summary:
-      "A full-stack deep research agent that searches the web and shows its reasoning loop as it works. It has Google and GitHub sign-in, usage-based billing and bring-your-own-key model support. Built without LangChain or LangGraph, and deployed.",
-    stack: ["Next.js", "Supabase", "Stripe", "SerpAPI", "Claude API", "AES-256-GCM", "pdf-lib"],
+      "A full-stack deep research agent with a visible reasoning loop, so users see the model's multi-step research and tool use as it happens. Built without LangChain or LangGraph, and live.",
+    points: [
+      "Added social login with OAuth and usage-based billing using Supabase and Stripe, for production-ready onboarding and metered monetization.",
+      "Designed a bring-your-own-key system that encrypts user-provided API keys with AES-256-GCM, giving self-managed access to multiple LLM providers.",
+      "Integrated SerpAPI for live web search grounding and deployed on Vercel as a public product.",
+    ],
+    stack: ["Next.js", "React", "TypeScript", "Node.js", "Supabase", "Stripe", "SerpAPI", "OpenAI API", "Claude API", "AES-256-GCM", "Vercel"],
     links: [{ label: "Live site", href: "https://micromanus-mu-five.vercel.app/" }],
+  },
+  {
+    id: "plant-disease",
+    name: "Plant Disease Detection Using Feature Fusion",
+    kind: "Research, IEEE conference publication",
+    summary:
+      "A deep learning model that fuses spatial (RGB) and spectral (hyperspectral) features to classify plant diseases. It reached 97% accuracy, 5% better than single-modality baselines.",
+    points: [
+      "Processed hyperspectral image data with band selection, normalization and feature extraction, and augmented 5,000+ images with OpenCV and NumPy, reducing overfitting by 15%.",
+      "Fused handcrafted HOG descriptors with ResNet50 deep features, improving robustness under varying lighting.",
+      "Co-authored the findings for an IEEE conference, contributing multi-modal fusion techniques to agricultural disease detection.",
+    ],
+    stack: ["Python", "TensorFlow", "Keras", "OpenCV", "NumPy", "Pandas", "Scikit-learn"],
+    links: [],
   },
   {
     id: "dualmind",
@@ -106,6 +146,7 @@ export const projects = [
     kind: "LLM benchmarking framework",
     summary:
       "Compares Qwen2.5 and Claude Sonnet 4 on hallucination rate, bias resistance and content safety, using a 50-prompt test suite. FastAPI backend, GitHub Actions CI, deployed to Vercel, Render and Hugging Face Spaces.",
+    points: [],
     stack: ["Python", "FastAPI", "GitHub Actions", "Vercel", "Render", "Hugging Face Spaces"],
     links: [{ label: "Source", href: "https://github.com/Chitraksh23/dualmind-ai-eval" }],
   },
@@ -115,6 +156,7 @@ export const projects = [
     kind: "Hallucination detection kit",
     summary:
       "Checks RAG output for hallucinations. It splits an answer into atomic claims, checks each claim against its sources and combines the results into a hallucination score. Built for the Lamatic AgentKit challenge with a Next.js interface.",
+    points: [],
     stack: ["Next.js", "Lamatic AgentKit", "GraphQL"],
     links: [],
   },
@@ -124,6 +166,7 @@ export const projects = [
     kind: "Tool-calling chatbot",
     summary:
       "Suggests countries and visa routes based on your interests, then walks through the application process end to end. Uses a Groq-hosted open LLM with SerpAPI tool calling for current web results.",
+    points: [],
     stack: ["Groq", "SerpAPI", "Tool calling", "Vercel"],
     links: [],
   },
@@ -133,41 +176,42 @@ export const projects = [
     kind: "Real-time market analysis",
     summary:
       "A real-time screener for NSE-listed stocks, connected to Angel One's SmartAPI. It computes SMMA indicators, detects crossover signals, adds an ML scoring layer and shows everything in a Streamlit dashboard. Packaged as a Windows executable.",
+    points: [],
     stack: ["Python", "Streamlit", "SmartAPI", "Machine learning"],
-    links: [],
-  },
-  {
-    id: "plant-disease",
-    name: "Plant Disease Detection",
-    kind: "Academic research",
-    summary:
-      "A model that detects plant diseases, built as an academic project and published with IEEE.",
-    stack: ["Deep learning", "Computer vision", "IEEE publication"],
     links: [],
   },
 ];
 
 export const skills = [
+  { group: "Languages", items: ["Python", "C"] },
   {
-    group: "Generative AI",
+    group: "ML and deep learning",
+    items: ["TensorFlow", "Keras", "PyTorch", "Scikit-learn", "Pandas", "NumPy", "Hugging Face Transformers"],
+  },
+  {
+    group: "GenAI and LLMs",
     items: [
-      "Retrieval-augmented generation",
-      "Embeddings and semantic search",
+      "RAG",
+      "LangChain",
+      "LangGraph",
+      "LlamaIndex",
+      "OpenAI API",
+      "Anthropic Claude API",
       "Prompt engineering",
-      "Few-shot prompting",
-      "Agentic workflows",
-      "Tool calling",
-      "LLM evaluation",
-      "Hallucination detection",
+      "LLM evaluation (RAGAS)",
+      "Fine-tuning (LoRA, QLoRA)",
+      "vLLM",
+      "Ollama",
     ],
   },
   {
-    group: "Frameworks and data",
-    items: ["Python", "LangGraph", "FastAPI", "Streamlit", "Next.js", "OpenSearch", "Supabase"],
+    group: "Agentic AI",
+    items: ["AI agents", "MCP", "Function and tool calling", "Structured outputs", "Model context engineering"],
   },
+  { group: "Data and vector databases", items: ["FAISS", "Chroma DB", "Pinecone", "OpenSearch", "MySQL"] },
   {
-    group: "Cloud and delivery",
-    items: ["AWS (S3, EC2, Lambda)", "Vercel", "Render", "Hugging Face Spaces", "GitHub Actions"],
+    group: "Cloud and DevOps",
+    items: ["AWS", "Docker", "Kubernetes", "CI/CD", "GitHub Actions", "FastAPI", "Git", "Jupyter"],
   },
 ];
 
@@ -176,14 +220,21 @@ export const education = [
     id: "amrita",
     kind: "Education",
     title: "B.Tech, Computer and Communication Engineering",
-    org: "Amrita Vishwa Vidyapeetham",
-    note: "",
+    org: "Amrita Vishwa Vidyapeetham, Coimbatore",
+    note: "2020 to 2024",
   },
   {
     id: "aws-ccp",
     kind: "Certification",
     title: "AWS Certified Cloud Practitioner",
     org: "Amazon Web Services",
+    note: "",
+  },
+  {
+    id: "ieee",
+    kind: "Publication",
+    title: "Plant Disease Detection Using Feature Fusion",
+    org: "IEEE conference paper",
     note: "",
   },
 ];

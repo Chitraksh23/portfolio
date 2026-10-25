@@ -1,6 +1,6 @@
 # Chitraksh, portfolio
 
-A fast static portfolio with no runtime dependencies. The page is generated from one content file, and a small "Ask this portfolio" box retrieves passages from that same content (BM25 keyword search in the browser, no LLM, no API keys).
+A fast static portfolio with no runtime dependencies. It has a light/dark theme switch (remembers the visitor's choice, follows the system by default), scroll reveals and hover effects that respect `prefers-reduced-motion`. The page is generated from one content file, and a small "Ask this portfolio" box retrieves passages from that same content (BM25 keyword search in the browser, no LLM, no API keys).
 
 ## Edit your content
 
@@ -15,6 +15,8 @@ Fill these in before you share the link:
 | Resume | `site.contact.resume` | `/resume.pdf` (put `resume.pdf` in `public/`) |
 | Live URL | `site.url` | `https://your-name.vercel.app` |
 | Dates | `experience[].period` | `2025 to present` |
+| Liquidmind points | `experience[1].highlights` | add `{ id, title, text, points: [...] }` |
+| Tech strip under the hero | `marquee` | `["LangGraph", ...]` |
 | Repo links | `projects[].links` | `{ label: "Source", href: "https://github.com/..." }` |
 
 The Orion bank project is anonymized as "a global bank". Rename it in `experience[0].highlights[1].title` if your client agreement allows.
@@ -50,6 +52,7 @@ src/styles.css         design tokens and layout
 src/js/chunks.mjs      content -> searchable passages
 src/js/retrieval.mjs   BM25 index, synonyms, highlighting
 src/js/main.js         search box behavior
+src/js/ui.js           theme switch, scroll reveal, nav indicator, glow
 build.mjs              writes dist/index.html and copies assets
 public/                files copied as-is (favicon, resume.pdf)
 test/                  retrieval checks

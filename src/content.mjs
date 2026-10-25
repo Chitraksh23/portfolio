@@ -31,6 +31,23 @@ export const site = {
   },
 };
 
+// Scrolling strip under the hero. Keep it to things you really use.
+export const marquee = [
+  "RAG pipelines",
+  "LangGraph",
+  "Vector search",
+  "OpenSearch",
+  "Prompt engineering",
+  "LLM evaluation",
+  "Hallucination detection",
+  "Tool calling",
+  "FastAPI",
+  "Next.js",
+  "Streamlit",
+  "AWS",
+  "Python",
+];
+
 export const experience = [
   {
     id: "orion",
@@ -119,6 +136,15 @@ export const projects = [
     stack: ["Python", "Streamlit", "SmartAPI", "Machine learning"],
     links: [],
   },
+  {
+    id: "plant-disease",
+    name: "Plant Disease Detection",
+    kind: "Academic research",
+    summary:
+      "A model that detects plant diseases, built as an academic project and published with IEEE.",
+    stack: ["Deep learning", "Computer vision", "IEEE publication"],
+    links: [],
+  },
 ];
 
 export const skills = [
@@ -159,12 +185,5 @@ export const education = [
     title: "AWS Certified Cloud Practitioner",
     org: "Amazon Web Services",
     note: "",
-  },
-  {
-    id: "ieee",
-    kind: "Research",
-    title: "Plant disease detection model",
-    org: "IEEE publication",
-    note: "An academic project on detecting plant diseases that led to an IEEE publication.",
   },
 ];

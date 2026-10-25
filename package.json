@@ -1,0 +1,13 @@
+{
+  "name": "chitraksh-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Personal portfolio for Chitraksh, AI Engineer. Static site, no dependencies.",
+  "scripts": {
+    "build": "node build.mjs",
+    "dev": "node build.mjs && npx --yes serve dist",
+    "test": "node test/retrieval.test.mjs"
+  },
+  "engines": { "node": ">=18" }
+}

@@ -15,8 +15,9 @@ export const site = {
   // It turns on the canonical link and the Open Graph URL.
   url: "",
 
-  intro:
-    "I build production GenAI systems: RAG pipelines, agent workflows, and the evaluation that shows whether they work.",
+  intro: "I build production GenAI systems, and the evidence that they work.",
+
+  focus: ["RAG systems", "agentic workflows", "LLM evaluation", "vector search", "prompt engineering"],
 
   about:
     "I'm an AI Engineer at Orion Innovation in Chennai, working there since November 2024. I build retrieval-augmented generation pipelines, agentic workflows and LLM evaluation for enterprise clients, including a financial document intelligence system and an internal HR knowledge assistant. Outside work I build projects to test ideas end to end, such as a deep research agent, an LLM benchmarking framework and a hallucination detector.",
@@ -29,25 +30,18 @@ export const site = {
     linkedin: "", // e.g. "https://www.linkedin.com/in/your-handle/"
     github: "https://github.com/chitraksh23",
     resume: "/resume.pdf", // replace public/resume.pdf to update it
+    resumeFileName: "Singisetti_Chitraksh_Resume.pdf", // name of the downloaded file
   },
 };
 
-// Scrolling strip under the hero. Keep it to things you really use.
-export const marquee = [
-  "RAG pipelines",
-  "LangGraph",
-  "Agentic AI",
-  "Vector search",
-  "OpenSearch",
-  "Prompt engineering",
-  "LLM evaluation",
-  "Tool calling",
-  "MCP",
-  "Fine-tuning",
-  "FastAPI",
-  "AWS",
-  "Docker",
-  "Python",
+// Numbers from your own work. Counted up on screen when scrolled into view.
+export const measurements = [
+  { value: 40, suffix: "%", label: "less time for analysts to find answers in financial documents", source: "Orion, client project" },
+  { value: 35, suffix: "%", label: "fewer hallucinations after prompt and grounding work", source: "Orion, client project" },
+  { value: 25, suffix: "%", label: "higher retrieval recall from the OpenSearch RAG pipeline", source: "Orion, client project" },
+  { value: 10000, suffix: "+", label: "documents ingested, chunked and indexed for Nexus", source: "Orion, Nexus" },
+  { value: 40, suffix: "%", label: "faster query resolution with the HR assistant", source: "Orion, Nexus" },
+  { value: 97, suffix: "%", label: "classification accuracy fusing RGB and hyperspectral features", source: "IEEE conference paper" },
 ];
 
 export const experience = [
@@ -114,6 +108,8 @@ export const experience = [
 export const projects = [
   {
     id: "micromanus",
+    latin: "Investigator visibilis",
+    stage: "plate",
     name: "MicroManus",
     kind: "Deep research AI agent",
     summary:
@@ -128,6 +124,8 @@ export const projects = [
   },
   {
     id: "plant-disease",
+    latin: "Folium fusionis",
+    stage: "plate",
     name: "Plant Disease Detection Using Feature Fusion",
     kind: "Research, IEEE conference publication",
     summary:
@@ -142,6 +140,8 @@ export const projects = [
   },
   {
     id: "dualmind",
+    latin: "Iudex duplex",
+    stage: "plate",
     name: "DualMind AI",
     kind: "LLM benchmarking framework",
     summary:
@@ -152,6 +152,8 @@ export const projects = [
   },
   {
     id: "grounding-auditor",
+    latin: "Veritas atomica",
+    stage: "plate",
     name: "Grounding Auditor",
     kind: "Hallucination detection kit",
     summary:
@@ -162,6 +164,8 @@ export const projects = [
   },
   {
     id: "visa-advisor",
+    latin: "Viator consultans",
+    stage: "greenhouse",
     name: "Visa Advisor",
     kind: "Tool-calling chatbot",
     summary:
@@ -172,6 +176,8 @@ export const projects = [
   },
   {
     id: "nse-screener",
+    latin: "Taurus ursusque",
+    stage: "plate",
     name: "NSE Stock Screener",
     kind: "Real-time market analysis",
     summary:

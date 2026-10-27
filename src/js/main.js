@@ -1,4 +1,4 @@
-import { site, experience, projects, skills, education } from "./content.mjs";
+import { site, experience, projects, skills, education, measurements } from "./content.mjs";
 import { buildChunks } from "./chunks.mjs";
 import { createIndex, search, highlight, esc } from "./retrieval.mjs";
 
@@ -7,7 +7,7 @@ const input = document.getElementById("q");
 const answers = document.getElementById("answers");
 const chips = document.querySelectorAll("[data-question]");
 
-const index = createIndex(buildChunks({ site, experience, projects, skills, education }));
+const index = createIndex(buildChunks({ site, experience, projects, skills, education, measurements }));
 
 function resultHtml(r, i) {
   const hits = new Set();

@@ -1,7 +1,7 @@
 // Turns the content file into small passages the search box can retrieve.
 // Pure data in, plain objects out. Runs in the browser and in tests.
 
-export function buildChunks({ site, experience, projects, skills, education }) {
+export function buildChunks({ site, experience, projects, skills, education, measurements = [] }) {
   const chunks = [];
 
   chunks.push({
@@ -12,6 +12,18 @@ export function buildChunks({ site, experience, projects, skills, education }) {
     text: site.about,
     tags: [site.role, site.employer, site.location].filter(Boolean),
     anchor: "top",
+  });
+
+  measurements.forEach((m, i) => {
+    chunks.push({
+      id: `measurement-${i}`,
+      section: "Measurements",
+      where: m.source,
+      title: `${m.value.toLocaleString("en-US")}${m.suffix}`,
+      text: m.label,
+      tags: [],
+      anchor: "measurements",
+    });
   });
 
   for (const role of experience) {
@@ -62,7 +74,7 @@ export function buildChunks({ site, experience, projects, skills, education }) {
       title: s.group,
       text: s.items.join(", "),
       tags: [],
-      anchor: "skills",
+      anchor: "toolkit",
     });
   }
 
@@ -74,7 +86,7 @@ export function buildChunks({ site, experience, projects, skills, education }) {
       title: e.title,
       text: [e.org, e.note].filter(Boolean).join(". "),
       tags: [],
-      anchor: "education",
+      anchor: "schooling",
     });
   }
 

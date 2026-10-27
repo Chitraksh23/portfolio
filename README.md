@@ -1,6 +1,6 @@
 # Chitraksh, portfolio
 
-A fast static portfolio with no runtime dependencies. It has a light/dark theme switch (remembers the visitor's choice, follows the system by default), scroll reveals and hover effects that respect `prefers-reduced-motion`. The page is generated from one content file, and a small "Ask this portfolio" box retrieves passages from that same content (BM25 keyword search in the browser, no LLM, no API keys).
+A fast static portfolio with no runtime dependencies. The design is a field journal: paper texture, hand-drawn edges, numbered chapters and specimen plates for projects. A "lamplight" switch toggles light and dark (it remembers the visitor's choice and follows the system by default). It is built for smooth scrolling: no blur filters, no scroll listeners, and only opacity and transform animate. Motion respects `prefers-reduced-motion`. The Resume (PDF) buttons download `public/resume.pdf`. The page is generated from one content file, and a small "Ask this portfolio" box retrieves passages from that same content (BM25 keyword search in the browser, no LLM, no API keys).
 
 ## Edit your content
 
@@ -15,7 +15,8 @@ Fill these in before you share the link:
 | Resume | `site.contact.resume` | already set to `/resume.pdf`; replace `public/resume.pdf` to update |
 | Live URL | `site.url` | `https://your-name.vercel.app` |
 | Dates | `experience[].period` | `2025 to present` |
-| Tech strip under the hero | `marquee` | `["LangGraph", ...]` |
+| Headline numbers | `measurements` | `{ value: 40, suffix: "%", label, source }` |
+| Project stage | `projects[].stage` | `"plate"` or `"greenhouse"` (still growing) |
 | Repo links | `projects[].links` | `{ label: "Source", href: "https://github.com/..." }` |
 
 The Orion bank project is anonymized as "a global bank". Rename it in `experience[0].highlights[1].title` if your client agreement allows.
@@ -51,8 +52,8 @@ src/styles.css         design tokens and layout
 src/js/chunks.mjs      content -> searchable passages
 src/js/retrieval.mjs   BM25 index, synonyms, highlighting
 src/js/main.js         search box behavior
-src/js/ui.js           theme switch, scroll reveal, nav indicator, glow
+src/js/ui.js           lamplight switch, reveal on scroll, count-up, active nav link
 build.mjs              writes dist/index.html and copies assets
-public/                files copied as-is (favicon, resume.pdf)
+public/                files copied as-is (favicon, resume.pdf, paper.png texture)
 test/                  retrieval checks
 ```

@@ -1,138 +1,93 @@
-// Theme switch, scroll reveal, nav indicator, progress bar and pointer glow.
-// Everything degrades to a normal static page if this file fails to load.
+// Theme switch, reveal on scroll, count-up numbers and the active nav link.
+// No scroll listeners: everything runs off IntersectionObserver so scrolling stays smooth.
 
 const root = document.documentElement;
-const reduce = matchMedia("(prefers-reduced-motion: reduce)");
-const dark = matchMedia("(prefers-color-scheme: dark)");
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-/* ───── Theme ───── */
-const themeBtn = document.getElementById("theme");
+/* ───── Lamplight (theme) ───── */
+const btn = document.getElementById("theme");
+const system = matchMedia("(prefers-color-scheme: dark)");
 const stored = () => {
   try { return localStorage.getItem("theme"); } catch { return null; }
 };
-const currentTheme = () => root.dataset.theme || (dark.matches ? "dark" : "light");
+const current = () => root.dataset.theme || (system.matches ? "dark" : "light");
 
-function applyTheme(next, persist) {
-  root.dataset.theme = next;
+function apply(theme, persist) {
+  root.dataset.theme = theme;
+  btn?.setAttribute("aria-pressed", String(theme === "dark"));
   if (persist) {
-    try { localStorage.setItem("theme", next); } catch { /* storage blocked */ }
+    try { localStorage.setItem("theme", theme); } catch { /* storage blocked */ }
   }
-  themeBtn?.setAttribute("aria-label", next === "dark" ? "Switch to light theme" : "Switch to dark theme");
 }
-applyTheme(currentTheme(), false);
+apply(current(), false);
 
-themeBtn?.addEventListener("click", (e) => {
-  const next = currentTheme() === "dark" ? "light" : "dark";
-  if (!document.startViewTransition || reduce.matches) {
-    applyTheme(next, true);
-    return;
-  }
-  const x = e.clientX || innerWidth / 2;
-  const y = e.clientY || 0;
-  const radius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
-  const transition = document.startViewTransition(() => applyTheme(next, true));
-  transition.ready.then(() => {
-    root.animate(
-      { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`] },
-      { duration: 650, easing: "cubic-bezier(0.22, 0.8, 0.2, 1)", pseudoElement: "::view-transition-new(root)" }
-    );
-  }).catch(() => {});
+btn?.addEventListener("click", () => {
+  const next = current() === "dark" ? "light" : "dark";
+  if (document.startViewTransition && !reduce) document.startViewTransition(() => apply(next, true));
+  else apply(next, true);
+});
+system.addEventListener("change", () => {
+  if (!stored()) apply(system.matches ? "dark" : "light", false);
 });
 
-// Follow the system setting until the visitor picks one themselves.
-dark.addEventListener("change", () => {
-  if (!stored()) applyTheme(dark.matches ? "dark" : "light", false);
-});
-
-/* ───── Reveal on scroll ───── */
-const revealTargets = [...document.querySelectorAll("[data-reveal]")];
-function settle(el) {
-  // Hand the element back to its normal hover transitions once it has appeared.
-  setTimeout(() => {
-    el.removeAttribute("data-reveal");
-    el.classList.remove("in");
-    el.style.removeProperty("--d");
-  }, 1100 + (parseInt(el.style.getPropertyValue("--d")) || 0));
+/* ───── Reveal + count-up ───── */
+function countUp(el) {
+  const end = Number(el.dataset.count);
+  if (!Number.isFinite(end)) return;
+  const t0 = performance.now();
+  const dur = 1000;
+  const step = (now) => {
+    const t = Math.min(1, (now - t0) / dur);
+    el.textContent = Math.round(end * (1 - Math.pow(1 - t, 3))).toLocaleString("en-US");
+    if (t < 1) requestAnimationFrame(step);
+  };
+  el.textContent = "0";
+  requestAnimationFrame(step);
 }
-if ("IntersectionObserver" in window && !reduce.matches) {
+
+const targets = document.querySelectorAll(".rv");
+if ("IntersectionObserver" in window && !reduce) {
   const io = new IntersectionObserver(
     (entries) => {
-      for (const entry of entries) {
-        if (!entry.isIntersecting) continue;
-        entry.target.classList.add("in");
-        io.unobserve(entry.target);
-        settle(entry.target);
+      for (const e of entries) {
+        if (!e.isIntersecting) continue;
+        e.target.classList.add("in");
+        e.target.querySelectorAll("[data-count]").forEach(countUp);
+        io.unobserve(e.target);
       }
     },
-    { rootMargin: "0px 0px -8% 0px", threshold: 0.06 }
+    { rootMargin: "0px 0px -10% 0px", threshold: 0.05 }
   );
-  revealTargets.forEach((el) => io.observe(el));
+  targets.forEach((el) => io.observe(el));
 } else {
-  revealTargets.forEach((el) => el.classList.add("in"));
+  targets.forEach((el) => el.classList.add("in"));
 }
 
-/* ───── Scroll progress + header state ───── */
-const bar = document.querySelector(".progress span");
-const header = document.querySelector(".top");
-let ticking = false;
-function onScroll() {
-  if (ticking) return;
-  ticking = true;
-  requestAnimationFrame(() => {
-    const max = root.scrollHeight - innerHeight;
-    if (bar) bar.style.transform = `scaleX(${max > 0 ? Math.min(scrollY / max, 1) : 0})`;
-    header?.classList.toggle("scrolled", scrollY > 8);
-    ticking = false;
-  });
-}
-addEventListener("scroll", onScroll, { passive: true });
-onScroll();
-
-/* ───── Active section indicator ───── */
-const nav = document.querySelector("nav.main");
-const pill = document.querySelector(".nav-pill");
+/* ───── Active section in the nav ───── */
 const links = [...document.querySelectorAll("nav.main a")];
 const byId = new Map(links.map((a) => [a.getAttribute("href").slice(1), a]));
-let activeId = null;
-
-function setActive(id) {
-  activeId = id;
-  links.forEach((a) => a.removeAttribute("aria-current"));
-  const link = byId.get(id);
-  if (!link || !pill) {
-    if (pill) pill.style.opacity = "0";
-    return;
-  }
-  link.setAttribute("aria-current", "true");
-  const n = nav.getBoundingClientRect();
-  const a = link.getBoundingClientRect();
-  pill.style.opacity = "1";
-  pill.style.width = `${a.width}px`;
-  pill.style.transform = `translateX(${a.left - n.left + nav.scrollLeft}px)`;
-  link.scrollIntoView?.({ block: "nearest", inline: "center", behavior: reduce.matches ? "auto" : "smooth" });
-}
-
 if ("IntersectionObserver" in window) {
   const spy = new IntersectionObserver(
-    (entries) => entries.forEach((e) => e.isIntersecting && setActive(e.target.id)),
-    { rootMargin: "-45% 0px -50% 0px" }
+    (entries) => {
+      for (const e of entries) {
+        if (!e.isIntersecting) continue;
+        links.forEach((a) => a.removeAttribute("aria-current"));
+        byId.get(e.target.id)?.setAttribute("aria-current", "true");
+      }
+    },
+    { rootMargin: "-35% 0px -60% 0px" }
   );
-  ["top", ...byId.keys()].forEach((id) => {
+  byId.forEach((_, id) => {
     const el = document.getElementById(id);
     if (el) spy.observe(el);
   });
 }
-addEventListener("resize", () => activeId && setActive(activeId), { passive: true });
 
-/* ───── Pointer glow ───── */
-document.addEventListener(
-  "pointermove",
-  (e) => {
-    const el = e.target.closest?.("[data-spot]");
-    if (!el) return;
-    const r = el.getBoundingClientRect();
-    el.style.setProperty("--mx", `${e.clientX - r.left}px`);
-    el.style.setProperty("--my", `${e.clientY - r.top}px`);
-  },
-  { passive: true }
-);
+/* ───── Open a plate when a search result links to it ───── */
+function openPlate() {
+  const id = location.hash.slice(1);
+  if (!id) return;
+  document.getElementById(id)?.querySelector("details")?.setAttribute("open", "");
+}
+addEventListener("hashchange", openPlate);
+openPlate();

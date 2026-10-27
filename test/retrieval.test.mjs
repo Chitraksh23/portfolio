@@ -1,9 +1,9 @@
 import assert from "node:assert/strict";
-import { site, experience, projects, skills, education } from "../src/content.mjs";
+import { site, experience, projects, skills, education, measurements } from "../src/content.mjs";
 import { buildChunks } from "../src/js/chunks.mjs";
 import { createIndex, search } from "../src/js/retrieval.mjs";
 
-const index = createIndex(buildChunks({ site, experience, projects, skills, education }));
+const index = createIndex(buildChunks({ site, experience, projects, skills, education, measurements }));
 const top = (q) => search(index, q, { limit: 3 }).map((r) => r.chunk.id);
 
 const cases = [
